@@ -1,0 +1,7 @@
+{
+  "name": "minigolf-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
