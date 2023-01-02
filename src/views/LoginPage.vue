@@ -8,7 +8,7 @@
         <ion-content>
         <ion-list>
             <ion-item>
-            <ion-label position="floating">Email</ion-label>
+            <ion-label >Email</ion-label>
             <ion-input type="email" v-model="email"></ion-input>
             </ion-item>
             <ion-item>
