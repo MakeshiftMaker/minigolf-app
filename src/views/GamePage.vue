@@ -12,7 +12,7 @@
                     {{name}}
                 </ion-item>
             </ion-list>
-            <ion-label position="floating">New Player</ion-label>
+            <ion-label>New Player</ion-label>
             <ion-input v-on:keyup.enter="onEnter" type="text" v-model="name"></ion-input>
             <ion-button @click="startGame">Start Game</ion-button>
         </ion-content>
