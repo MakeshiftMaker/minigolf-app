@@ -2,25 +2,52 @@
     <ion-page>
         <ion-header>
         <ion-toolbar>
-            <ion-title>Home</ion-title>
+            <div class="logo-card">
+                <ion-card>
+                    <img alt="Silhouette of mountains" src="../img/favicon.svg" />
+                </ion-card>
+            </div>
         </ion-toolbar>
         </ion-header>
-        <ion-content>
-        <ion-button href="/game">Neues Spiel</ion-button>
-        <ion-button href="/login">Einloggen</ion-button>
-        <ion-button href="/register">Registrieren</ion-button>
+        <ion-content class="game-buttons">
+            <ion-button href="/game">Neues Spiel</ion-button>
+            <ion-button href="/login">Einloggen</ion-button>
+            <ion-button href="/register">Registrieren</ion-button>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-export default {
+ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+  import { defineComponent } from 'vue';
 
-}
+  export default defineComponent({
+    components: { IonCard },
+  });
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+
+ion-card{
+    border-radius: 50px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #B8D8C9;
+    
+}
+
+.game-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+    /* i fucking love when I tell css to to a very menial task and nothing happends*/
+}
 
 ion-button {
     --background: #FFFFFF !important;
@@ -35,6 +62,7 @@ ion-button {
     line-height: 29px;
 
     display: flex;
+    align-content: center;
 }
 
 .button {

@@ -1,38 +1,51 @@
 <template>
     <ion-page>
-        <ion-header>
-        <ion-toolbar>
-            <ion-title>Game</ion-title>
-        </ion-toolbar>
-        </ion-header>
+        <ion-content class="trackEntry" v-if="trackEntry">
+            <ion-slides>
+                <ion-slide class="main-course">
+                    <ion-button @click="this.mainCourse=true;this.trackEntry=false;this.nameEntry=true">Hauptplatz</ion-button>
+                </ion-slide>
+
+                <ion-slide class="miniature-course">
+                    <ion-button @click="this.mainCourse=false;this.trackEntry=false;this.nameEntry=true">Miniatur-Platz</ion-button>
+                </ion-slide>
+            </ion-slides>
+        </ion-content>
+
+        <div>Spieler</div>
         <ion-content class="nameEntry" v-if="nameEntry">
             <ion-list>
-                Names:
+                
                 <ion-item v-for="name in names" :key="name">
-                    {{name}}
+                   {{name}}
                 </ion-item>
             </ion-list>
-            <ion-label>New Player</ion-label>
+            <ion-label>Namen Eingeben</ion-label>
             <ion-input v-on:keyup.enter="onEnter" type="text" v-model="name"></ion-input>
             <ion-button @click="startGame">Start Game</ion-button>
         </ion-content>
+
+
         <ion-content class="counter" v-if="counter">
             {{names[turn]}}'s turn'
             strokes: {{strokes}}
             track: {{track+1}}
-            <ion-button @click="strokes++">+</ion-button>
-            <ion-button @click="negateStroke">-</ion-button>
-            <ion-button @click="nextPlayer">Next Turn</ion-button>  
-            <ion-button @click="debug">Leaderboard</ion-button> 
+            <ion-card class="buttons">
+                <ion-button @click="strokes++">+</ion-button>
+                <ion-button @click="negateStroke">-</ion-button>
+            </ion-card>
+                <ion-button @click="nextPlayer">nächster Spieler</ion-button>  
+                <ion-button @click="debug">Leaderboard</ion-button> 
+            
         </ion-content>
         <ion-content class="leaderBoard" v-if="leaderBoard">
             
             <ion-grid>
                 <ion-row size="auto">
-                    <ion-col size="auto">
+                    <ion-col class="leaderBoardName" size="auto">
                         Name
                     </ion-col>
-                    <ion-col size="auto" v-for="player in pointData" :key="player.name">
+                    <ion-col class="leaderBoardNames" size="auto" v-for="player in pointData" :key="player.name">
                         {{player.name}}
                     </ion-col>
                 </ion-row>
@@ -77,13 +90,15 @@ export default defineComponent({
     data() {
         return {
             name: '',
-            names: ["ben", "joe", "jim"],
-            nameEntry: true,
+            names: [],
+            trackEntry: true,
+            nameEntry: false,
             counter: false,
             leaderBoard: false,
             turn: 0,
             strokes: 0,
-            track : 0,
+            track : 0, //current track for the player
+            mainCourse: true, //main/miniature track
             tracks: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
             pointData: [],
             gameID: "",
@@ -101,7 +116,7 @@ export default defineComponent({
         },
         async startGame() {
             if(this.names.length == 0){
-                alert("Please enter at least one name");
+                alert("Bitte mindestens einen Namen eingeben");
                 return;
             }
             this.nameEntry = false;
@@ -132,6 +147,7 @@ export default defineComponent({
             const record = await db.collection("games").create(data);
         },
         async nextPlayer() {
+            console.log("next player");
             if(this.turn < this.names.length-1){
                 //update the current players score in the database with the score they just got, then go to the next player
                 //console.log(this.pointData);
@@ -178,5 +194,13 @@ export default defineComponent({
 </script>
 
 <style>
+/*Background image not working pls help*/
+.main-course {
+    background-image: "../img/minigolfplatz-bischofshofen-overwiew.gif";
+}
+.miniature-course {
+    background-image: "../img/minigolfplatz-bischofshofen-overwiew.gif";
+}
+/*Die + und - buttons sollten höher aber dünner sein, und die ion-card ist für irgendeinen grund 6.000 meter hoch*/ 
 
 </style>
