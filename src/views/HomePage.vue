@@ -27,6 +27,7 @@
 </script>
 
 <style>
+/*
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 ion-card{
@@ -40,14 +41,7 @@ ion-card{
     
 }
 
-.game-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20%;
-    /* i fucking love when I tell css to to a very menial task and nothing happends*/
-}
+
 
 ion-button {
     --background: #FFFFFF !important;

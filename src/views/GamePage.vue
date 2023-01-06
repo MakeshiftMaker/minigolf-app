@@ -1,5 +1,10 @@
 <template>
     <ion-page>
+
+        <game-toolbar></game-toolbar>
+
+
+
         <ion-content class="trackEntry" v-if="trackEntry">
             <ion-slides>
                 <ion-slide class="main-course">
@@ -12,8 +17,9 @@
             </ion-slides>
         </ion-content>
 
-        <div>Spieler</div>
+        
         <ion-content class="nameEntry" v-if="nameEntry">
+            <div>Spieler</div>
             <ion-list>
                 
                 <ion-item v-for="name in names" :key="name">
@@ -35,41 +41,18 @@
                 <ion-button @click="negateStroke">-</ion-button>
             </ion-card>
                 <ion-button @click="nextPlayer">nächster Spieler</ion-button>  
-                <ion-button @click="debug">Leaderboard</ion-button> 
-            
+                <ion-button @click="surenessModal=true">Spiel Beenden</ion-button> 
+                <ion-modal v-if="surenessModal">
+                
+                    <div>Sind Sie sicher, dass Sie das Spiel beenden wollen?</div>
+                    <ion-button @click="endGame">Ja</ion-button>
+                    <ion-button @click="surenessModal=false">Nein</ion-button>
+
+                </ion-modal>
         </ion-content>
-        <ion-content class="leaderBoard" v-if="leaderBoard">
             
-            <ion-grid>
-                <ion-row size="auto">
-                    <ion-col class="leaderBoardName" size="auto">
-                        Name
-                    </ion-col>
-                    <ion-col class="leaderBoardNames" size="auto" v-for="player in pointData" :key="player.name">
-                        {{player.name}}
-                    </ion-col>
-                </ion-row>
-                <ion-row size="auto" v-for="track in tracks" :key="track">
-                    {{track}}:
-                    <ion-col size="auto" v-for="player in pointData" :key="player.name">
-                        {{ player.score[track-1].score }}
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col size="auto">
-                        Total
-                    </ion-col>
-                    <ion-col size="auto" v-for="player in pointData" :key="player.name">
-                        {{player.score.reduce((a, b) => a + b.score, 0)}}
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-
-
-
             
-        </ion-content>
+        
     </ion-page>
 </template>
 
@@ -77,6 +60,7 @@
 import db from "./database/db.js"
 import { IonInput, IonItem, IonLabel, IonList } from '@ionic/vue';
 import { defineComponent } from 'vue';
+import GameToolbar from './GameToolbar.vue';
 
 export default defineComponent({
     name: 'RegisterPage',
@@ -85,12 +69,13 @@ export default defineComponent({
         IonItem,
         IonLabel,
         IonList,
+        GameToolbar,
         
     },
     data() {
         return {
             name: '',
-            names: [],
+            names: ["Max", "Moritz", "Hans"],
             trackEntry: true,
             nameEntry: false,
             counter: false,
@@ -102,6 +87,7 @@ export default defineComponent({
             tracks: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
             pointData: [],
             gameID: "",
+            surenessModal: false,
         };
     },
     methods: {
@@ -188,7 +174,24 @@ export default defineComponent({
             this.nameEntry=false;
             this.counter=false;
             this.leaderBoard=true;
-        }
+        },
+        async endGame(){
+            this.surenessModal = false;
+
+            
+            this.pointData[this.turn].score[this.track].score = this.strokes;
+                const data = {
+                "data": {
+                    "pointData": this.pointData,
+                    
+                },
+            }
+                const record = await db.collection("games").update(this.gameID, data)
+
+            this.$router.go(-1);
+            this.sureness=false;
+            
+        },
     },          
 });
 </script>

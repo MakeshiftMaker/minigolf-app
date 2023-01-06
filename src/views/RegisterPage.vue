@@ -56,8 +56,15 @@ export default defineComponent({
         async register() {
         
             try{
-            if (this.password === this.password_check) {
-                const data = {
+                if(this.email === "" || this.password === "" || this.password_check === "" || this.username === "") {
+                    alert("Bitte alle Felder ausfüllen");
+                } else
+                if (this.password !== this.password_check) {
+                    alert("Passwörter stimmen nicht überein");
+                } else if(this.password.length < 8) {
+                    alert("Passwort muss mindestens 8 Zeichen lang sein");
+                } else {
+                        const data = {
                     "username": this.username,
                     "email": this.email,
                     "emailVisibility": true,
@@ -66,14 +73,15 @@ export default defineComponent({
                     "name": this.email
                 };
                 const record = await db.collection('users').create(data);
-                window.location.href = "/home";
-            } else {
-                alert('Passwörter stimmen nicht überein');
+
+                        alert("Registrierung erfolgreich");
+                        window.location.href = "/home";
+                    }
+                }
+             catch (err){
+                alert("Registrierung fehlgeschlagen, ist die E-Mail Adresse bereits registriert?");
+                console.log(err)
             }
-        } catch (err){
-            alert(err.message);
-            console.log(err.message)
-        }
         
         },
     }
