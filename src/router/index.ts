@@ -31,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/profile',
     name: 'Profile',
     component: () => import(/* webpackChunkName: "profile" */ '../views/ProfilePage.vue')
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: () => import(/* webpackChunkName: "menu" */ '../views/SideMenu.vue')
   }
   
 ]

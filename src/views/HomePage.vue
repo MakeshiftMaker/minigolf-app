@@ -1,5 +1,37 @@
 <template>
-    <ion-page>
+    
+
+        <ion-menu content-id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu Content</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-button href="/home">Hauptmenü</ion-button>
+        <ion-button>Neues Spiel</ion-button>
+        <ion-button>Statistik</ion-button>
+        <ion-button>Optionen</ion-button>
+        <ion-button>Über</ion-button>
+
+
+      </ion-content>
+    </ion-menu>
+
+    <ion-page id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Home</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+
+
+
         <ion-header>
         <ion-toolbar>
             <div class="logo-card">
@@ -27,7 +59,7 @@
 </script>
 
 <style>
-/*
+
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 ion-card{

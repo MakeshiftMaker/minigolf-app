@@ -1,11 +1,36 @@
 <template>
-    <ion-page>
+        <ion-menu content-id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu Content</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
 
-        <game-toolbar></game-toolbar>
+        <ion-button href="/home">Hauptmenü</ion-button>
+        <ion-button>Neues Spiel</ion-button>
+        <ion-button>Statistik</ion-button>
+        <ion-button>Optionen</ion-button>
+        <ion-button>Über</ion-button>
+
+
+      </ion-content>
+    </ion-menu>
 
 
 
-        <ion-content class="trackEntry" v-if="trackEntry">
+    <ion-page id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+            <ion-title>Game</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+
+        <div class="trackEntry" v-if="trackEntry">
             <ion-slides>
                 <ion-slide class="main-course">
                     <ion-button @click="this.mainCourse=true;this.trackEntry=false;this.nameEntry=true">Hauptplatz</ion-button>
@@ -15,10 +40,10 @@
                     <ion-button @click="this.mainCourse=false;this.trackEntry=false;this.nameEntry=true">Miniatur-Platz</ion-button>
                 </ion-slide>
             </ion-slides>
-        </ion-content>
+        </div>
 
         
-        <ion-content class="nameEntry" v-if="nameEntry">
+        <div class="nameEntry" v-if="nameEntry">
             <div>Spieler</div>
             <ion-list>
                 
@@ -29,10 +54,10 @@
             <ion-label>Namen Eingeben</ion-label>
             <ion-input v-on:keyup.enter="onEnter" type="text" v-model="name"></ion-input>
             <ion-button @click="startGame">Start Game</ion-button>
-        </ion-content>
+        </div>
 
 
-        <ion-content class="counter" v-if="counter">
+        <div class="counter" v-if="counter">
             {{names[turn]}}'s turn'
             strokes: {{strokes}}
             track: {{track+1}}
@@ -49,9 +74,9 @@
                     <ion-button @click="surenessModal=false">Nein</ion-button>
 
                 </ion-modal>
-        </ion-content>
+            </div>
             
-            
+         
         
     </ion-page>
 </template>
@@ -60,7 +85,7 @@
 import db from "./database/db.js"
 import { IonInput, IonItem, IonLabel, IonList } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import GameToolbar from './GameToolbar.vue';
+
 
 export default defineComponent({
     name: 'RegisterPage',
@@ -69,7 +94,7 @@ export default defineComponent({
         IonItem,
         IonLabel,
         IonList,
-        GameToolbar,
+        
         
     },
     data() {
