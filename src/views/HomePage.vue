@@ -36,7 +36,7 @@
         <ion-toolbar>
             <div class="logo-card">
                 <ion-card>
-                    <img alt="Silhouette of mountains" src="../img/favicon.svg" />
+                    <img alt="Silhouette of mountains" src="../img/favicon-schwaz-dick.svg" />
                 </ion-card>
             </div>
         </ion-toolbar>
@@ -88,7 +88,9 @@ ion-button {
     line-height: 29px;
 
     display: flex;
-    align-content: center;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .button {
@@ -105,6 +107,8 @@ ion-button {
     line-height: 29px;
 
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 html {
@@ -155,8 +159,8 @@ html {
     max-height: 43px !important;
     box-shadow: 0px 4px 6px rgba(49, 77, 63, 0.5);
     
-    margin-top: 3%; 
-    margin-bottom: 3%; 
+    margin-top: 2%; 
+    margin-bottom: 2%; 
     margin-left: 1%; 
     
     font-weight: 600;
@@ -164,23 +168,28 @@ html {
     line-height: 25px;
 }
 
-.native-input {
-    background-color: #B8D8C9 !important; 
-    border-radius: 15px !important; 
-    max-width: 243px !important;
-    max-height: 43px !important;
-    box-shadow: 0px 4px 6px rgba(49, 77, 63, 0.5);
-    
-    margin-top: 3%; 
-    margin-bottom: 3%; 
-    margin-left: 1%; 
-    
-    font-weight: 500 !important;
-    font-size: 20px !important;
-    line-height: 25px;
-    color: #314D3F !important;
-}  
+ion-card {
+    width: 290px;
+    height: 250px;
+    background: #8CC4A9;
+}
 
+img {
+    height: 240px;
+    width: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Burger-Menu*/
+.in-toolbar.ion-focusable {
+    --background: transparent !important; 
+    width: auto;
+    color: #314D3F !important; 
+    border: 0px; 
+}
 
 
 </style>
