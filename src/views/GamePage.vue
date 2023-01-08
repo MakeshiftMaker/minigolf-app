@@ -62,8 +62,8 @@
             strokes: {{strokes}}
             track: {{track+1}}
             <ion-card class="buttons">
-                <ion-button @click="strokes++">+</ion-button>
-                <ion-button @click="negateStroke">-</ion-button>
+                <ion-button class="action-button" @click="strokes++">+</ion-button>
+                <ion-button class="action-button" @click="negateStroke">-</ion-button>
             </ion-card>
                 <ion-button @click="nextPlayer">nächster Spieler</ion-button>  
                 <ion-button @click="surenessModal=true">Spiel Beenden</ion-button> 
@@ -230,5 +230,32 @@ export default defineComponent({
     background-image: "../img/minigolfplatz-bischofshofen-overwiew.gif";
 }
 /*Die + und - buttons sollten höher aber dünner sein, und die ion-card ist für irgendeinen grund 6.000 meter hoch*/ 
+
+
+.action-button{
+    width: 80px;
+    height: 140px;
+    --background: #B8D8C9 !important;
+    border: 0px; 
+    font-size: 60px;
+    margin: 10%;
+}
+
+.native-input {
+    background-color: #B8D8C9 !important; 
+    border-radius: 15px !important; 
+    max-width: 243px !important;
+    max-height: 43px !important;
+    box-shadow: 0px 4px 6px rgba(49, 77, 63, 0.5);
+    
+    margin-top: 3%; 
+    margin-bottom: 3%; 
+    margin-left: 1%; 
+    
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    line-height: 25px;
+    color: #314D3F !important;
+}  
 
 </style>
