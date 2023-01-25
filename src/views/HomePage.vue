@@ -10,8 +10,8 @@
       <ion-content class="ion-padding">
 
         <ion-button href="/home">Hauptmenü</ion-button>
-        <ion-button>Neues Spiel</ion-button>
-        <ion-button>Statistik</ion-button>
+        <ion-button href="/game">Neues Spiel</ion-button>
+        <ion-button href="/profile">Profil</ion-button>
         <ion-button>Optionen</ion-button>
         <ion-button>Über</ion-button>
 

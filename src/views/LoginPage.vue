@@ -1,8 +1,37 @@
 <template>
-    <ion-page>
+
+<ion-menu content-id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Menu Content</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <ion-button href="/home">Hauptmenü</ion-button>
+        <ion-button href="/game">Neues Spiel</ion-button>
+        <ion-button href="/profile">Profil</ion-button>
+        <ion-button>Optionen</ion-button>
+        <ion-button>Über</ion-button>
+
+
+      </ion-content>
+    </ion-menu>
+
+    <ion-page id="main-content">
+     
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Login</ion-title>
+        </ion-toolbar>
+
+
+    
         <ion-header>
         <ion-toolbar>
-            <ion-title>Login</ion-title>
+            
         </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -54,8 +83,13 @@ export default defineComponent({
             console.log(db.authStore.isValid);
             console.log(db.authStore.token);
             console.log(db.authStore.model.id);
+
+            if(db.authStore.isValid) {
+              window.location.href = "/profile";
+            }
         }
-    }
+    },
+    
 })
 
 </script>

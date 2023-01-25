@@ -1,5 +1,5 @@
 <template>
-        <ion-menu content-id="main-content">
+    <ion-menu content-id="main-content">
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu Content</ion-title>
@@ -8,8 +8,8 @@
       <ion-content class="ion-padding">
 
         <ion-button href="/home">Hauptmenü</ion-button>
-        <ion-button>Neues Spiel</ion-button>
-        <ion-button>Statistik</ion-button>
+        <ion-button href="/game">Neues Spiel</ion-button>
+        <ion-button href="/profile">Profil</ion-button>
         <ion-button>Optionen</ion-button>
         <ion-button>Über</ion-button>
 
@@ -88,7 +88,7 @@ import { defineComponent } from 'vue';
 
 
 export default defineComponent({
-    name: 'RegisterPage',
+    name: 'GamePage',
     components: {
         IonInput,
         IonItem,
@@ -156,6 +156,21 @@ export default defineComponent({
                 
             }
             const record = await db.collection("games").create(data);
+
+
+            //add the ID to the Users mathces list
+
+            const previousMatches = (await db.collection("users").getOne(db.authStore.model.id)).matches.matches;
+            previousMatches.push(this.gameID);
+            console.log(previousMatches)
+
+            const userData = {
+                "matches": {
+                    "matches": previousMatches,
+                    
+                },
+            }
+            const userRecord = await db.collection("users").update(db.authStore.model.id, userData);
         },
         async nextPlayer() {
             console.log("next player");
@@ -213,7 +228,7 @@ export default defineComponent({
             }
                 const record = await db.collection("games").update(this.gameID, data)
 
-            this.$router.go(-1);
+            window.location.href = "/home";
             this.sureness=false;
             
         },

@@ -1,5 +1,34 @@
 <template>
-    <ion-page>
+    <ion-menu content-id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu Content</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+    <ion-button href="/home">Hauptmenü</ion-button>
+    <ion-button href="/game">Neues Spiel</ion-button>
+    <ion-button href="/profile">Profil</ion-button>
+    <ion-button>Optionen</ion-button>
+    <ion-button>Über</ion-button>
+
+
+  </ion-content>
+</ion-menu>
+
+<ion-page id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header> 
+
+
+    
         <ion-header>
         <ion-toolbar>
             <ion-title>Register</ion-title>
@@ -8,19 +37,19 @@
         <ion-content>
         <ion-list>
             <ion-item>
-            <ion-label position="floating">Email</ion-label>
+            <ion-label position="stacked">Email</ion-label>
             <ion-input type="email" v-model="email"></ion-input>
             </ion-item>
             <ion-item>
-            <ion-label position="floating">Passwort</ion-label>
+            <ion-label position="stacked">Passwort</ion-label>
             <ion-input type="password" v-model="password"></ion-input>
             </ion-item>
             <ion-item>
-            <ion-label position="floating">Passwort Wiederholen</ion-label>
+            <ion-label position="stacked">Passwort Wiederholen</ion-label>
             <ion-input type="password" v-model="password_check"></ion-input>
             </ion-item>
             <ion-item>
-            <ion-label position="floating">Username</ion-label>
+            <ion-label position="stacked">Username</ion-label>
             <ion-input type="text" v-model="username"></ion-input>
             </ion-item>
         </ion-list>
