@@ -19,7 +19,7 @@
 
 
 
-    <ion-page id="main-content">
+    <ion-content id="main-content">
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
@@ -74,11 +74,11 @@
                     <ion-button @click="surenessModal=false">Nein</ion-button>
 
                 </ion-modal>
-            </div>
+        </div>
             
          
         
-    </ion-page>
+    </ion-content>
 </template>
 
 <script>
@@ -116,6 +116,7 @@ export default defineComponent({
         };
     },
     methods: {
+
         chooseCourse(course){
             this.mainCourse = course;
             this.trackEntry = false;
