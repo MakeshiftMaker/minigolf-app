@@ -2,7 +2,7 @@
     <ion-menu content-id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu Content</ion-title>
+      <ion-title>Register</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -23,7 +23,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Login</ion-title>
+      <ion-title>Register</ion-title>
     </ion-toolbar>
   </ion-header> 
 

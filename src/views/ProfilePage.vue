@@ -19,7 +19,7 @@
   </ion-content>
 </ion-menu>
 
-<ion-page id="main-content">
+<ion-content id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -36,10 +36,25 @@
       <ion-card-title>email {{ this.userInfo.email }}</ion-card-title>
       <ion-button color="danger" @click="logout">Ausloggen</ion-button>
     </ion-card-header>
-
-  <ion-list v-for="match in userMatches" :key="match">{{ match }}</ion-list>
-
-</ion-page>
+    <div>
+      Matches:
+      <ion-list v-for="match in matchData" :key="match">
+        <ion-button @click="getPlayerData">
+        {{ match.created.substring(0,match.created.length-5) }}
+        </ion-button>
+        <div v-if="showData">
+        <div  v-for="name in names" :key="name">
+          {{ name }}
+          <div v-for="score in points[0]" :key="score">
+            Bahn: {{ score.trackID}}
+            Punkte: {{ score.score}}
+          </div>
+        </div>
+      </div>
+      </ion-list>
+    </div>
+  
+</ion-content>
 
 
 
@@ -49,6 +64,7 @@
 import db from "./database/db.js"
 import {IonMenu, IonHeader, IonToolbar, IonTitle,IonContent, IonButton} from '@ionic/vue';
 import { defineComponent } from 'vue';
+
 
 
 export default defineComponent({
@@ -66,6 +82,11 @@ export default defineComponent({
             loggedIn: false,
             userInfo: {},
             userMatches: [],
+            matchData: [],
+            names: [],
+            points: [],
+            showData: false
+            
         };
     },
     async mounted(){
@@ -75,10 +96,14 @@ export default defineComponent({
         console.log("Logged in");
         this.userInfo = db.authStore.model
         this.userMatches = (await db.collection("users").getOne(db.authStore.model.id)).matches.matches;
-        console.log(this.userMatches)
+        //console.log(this.userMatches)
         
+        for (let i = 0; i < this.userMatches.length; i++) {
+          this.matchData.push(await db.collection("games").getOne(this.userMatches[i]));
+          //console.log(this.matchData[i].data.pointData[i].name)
+        }
+        console.log(this.matchData)
         
-        console.log(this.userMatches)
 
       }else{
         this.loggedIn = false;
@@ -90,8 +115,24 @@ export default defineComponent({
             db.authStore.clear();
             this.loggedIn = false;
             location.reload();
+        },
+        getPlayerData() {
+          this.showData = !this.showData
+          console.log(this.show)
+          for(let i = 0; i < this.matchData.length; i++){
+            this.names.push(this.matchData[i].data.pointData[i].name)
+            //console.log(this.names[i])
         }
+          for(let j = 0; j <this.names.length; j++){
+            this.points.push(this.matchData[j].data.pointData[j].score)
+            
+          }
+          console.log(this.points)
+          
+    }
     },
-    
+    computed: {
+      
+    }
 });
 </script>

@@ -33,11 +33,11 @@
         <div class="trackEntry" v-if="trackEntry">
             <ion-slides>
                 <ion-slide class="main-course">
-                    <ion-button @click="this.mainCourse=true;this.trackEntry=false;this.nameEntry=true">Hauptplatz</ion-button>
+                    <ion-button @click="chooseCourse(true)">Hauptplatz</ion-button>
                 </ion-slide>
 
                 <ion-slide class="miniature-course">
-                    <ion-button @click="this.mainCourse=false;this.trackEntry=false;this.nameEntry=true">Miniatur-Platz</ion-button>
+                    <ion-button @click="chooseCourse(false)">Miniatur-Platz</ion-button>
                 </ion-slide>
             </ion-slides>
         </div>
@@ -116,6 +116,12 @@ export default defineComponent({
         };
     },
     methods: {
+        chooseCourse(course){
+            this.mainCourse = course;
+            this.trackEntry = false;
+            this.nameEntry = true;
+        },
+        
         
         async onEnter() {
             //only push names if they are not empty

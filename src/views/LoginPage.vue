@@ -74,19 +74,25 @@ export default defineComponent({
     },
     methods: {
         async login() {
+          try {
             const authData = await db.collection('users').authWithPassword(
             this.email,
             this.password,
             );
 
             // after the above you can also access the auth data from the authStore
-            console.log(db.authStore.isValid);
-            console.log(db.authStore.token);
-            console.log(db.authStore.model.id);
+            //console.log(db.authStore.isValid);
+            //console.log(db.authStore.token);
+            //console.log(db.authStore.model.id);
 
             if(db.authStore.isValid) {
               window.location.href = "/profile";
             }
+          }
+          catch (error) {
+            console.log(error);
+            alert("Fehler beim Einloggen");
+          }
         }
     },
     
