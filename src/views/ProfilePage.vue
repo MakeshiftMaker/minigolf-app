@@ -28,6 +28,8 @@
       <ion-title>Profile</ion-title>
     </ion-toolbar>
   </ion-header> 
+
+  
   <ion-card>
     <img style="border-radius: 30px" src="../img/Profile_avatar_placeholder_large.png" alt="">
   </ion-card>
@@ -79,7 +81,7 @@ export default defineComponent({
       },
     data() {
         return {
-            loggedIn: false,
+            
             userInfo: {},
             userMatches: [],
             matchData: [],
@@ -92,8 +94,6 @@ export default defineComponent({
     async mounted(){
       console.log(db.authStore.isValid)
       if(db.authStore.isValid){
-        this.loggedIn = true;
-        console.log("Logged in");
         this.userInfo = db.authStore.model
         this.userMatches = (await db.collection("users").getOne(db.authStore.model.id)).matches.matches;
         //console.log(this.userMatches)
@@ -106,14 +106,12 @@ export default defineComponent({
         
 
       }else{
-        this.loggedIn = false;
         window.location.href = "/login";
       }
     },
     methods: {
         logout() {
             db.authStore.clear();
-            this.loggedIn = false;
             location.reload();
         },
         getPlayerData() {
