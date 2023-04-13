@@ -100,7 +100,7 @@ export default defineComponent({
     data() {
         return {
             name: '',
-            names: ["Max", "Moritz", "Hans"],
+            names: [],
             trackEntry: true,
             nameEntry: false,
             counter: false,
